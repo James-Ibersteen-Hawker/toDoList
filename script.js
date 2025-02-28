@@ -9,9 +9,13 @@ get("#addTaskBtn").addEventListener("click", () => {
   let ul = get("#taskList");
   let li = `<li class="list-group-item d-flex justify-content-between align-items-center" id="li_${
     tasks.length - 1
-  }">${tasks[tasks.length - 1]}<button class="btn btn-success btn-sm" id="li_${
+  }"><span id="sp_${tasks.length - 1}">${
+    tasks[tasks.length - 1]
+  }</span><span><button class="btn btn-success btn-sm" id="li_${
     tasks.length - 1
-  }_del"> √ </button></li>`;
+  }_done"> √ </button>  <button class="btn btn-warning btn-sm" id="li_${
+    tasks.length - 1
+  }_del">❌</button></span></li>`;
   ul.insertAdjacentHTML("beforeend", li);
   li = get(`#li_${tasks.length - 1}_del`);
   li.addEventListener("click", () => {
@@ -21,7 +25,12 @@ get("#addTaskBtn").addEventListener("click", () => {
     li.remove();
     index = tasks.indexOf(listText);
     tasks.splice(index, 1);
-    //tasks.splice(tasks.indexOf(li.textContent.split(" ")[0].trim()), 1);
+  });
+  li = get(`#li_${tasks.length - 1}_done`);
+  li.addEventListener("click", () => {
+    let index = li.id.split("_")[1];
+    li = get(`#sp_${index}`);
+    li.classList.toggle("strike");
   });
 });
 get("#clearBtn").addEventListener("click", () => {
