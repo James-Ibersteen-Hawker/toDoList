@@ -1,11 +1,14 @@
 "use strict";
 let tasks = [];
+let counter = 0;
 get("#addTaskBtn").addEventListener("click", task);
 function task() {
   let inp = get("#taskInput");
   let value = inp.value;
   inp.value = "";
   if (!value) return;
+  counter++;
+  get("#counter").textContent = `Total Tasks: ${counter}`;
   tasks.push(value);
   let ul = get("#taskList");
   let li = `<li class="list-group-item d-flex justify-content-between align-items-center" id="li_${
@@ -26,6 +29,8 @@ function task() {
     li = get(`#li_${index}`);
     let listText = li.textContent.split(" ")[0].trim();
     li.remove();
+    counter--;
+    get("#counter").textContent = `Total Tasks: ${counter}`;
     index = tasks.indexOf(listText);
     tasks.splice(index, 1);
   });
@@ -51,6 +56,8 @@ function task() {
   });
 }
 get("#clearBtn").addEventListener("click", () => {
+  counter = 0;
+  get("#counter").textContent = `Total Tasks: ${counter}`;
   let ul = get("#taskList");
   ul.innerHTML = "";
   tasks = [];
