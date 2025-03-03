@@ -13,7 +13,9 @@ get("#addTaskBtn").addEventListener("click", () => {
     tasks[tasks.length - 1]
   }</span><span><button class="btn btn-success btn-sm" id="li_${
     tasks.length - 1
-  }_done"> √ </button>  <button class="btn btn-warning btn-sm" id="li_${
+  }_done"> √ </button><button class="btn btn-danger btn-sm d-none" id="li_${
+    tasks.length - 1
+  }_undone"> X </button>  <button class="btn btn-warning btn-sm" id="li_${
     tasks.length - 1
   }_del">❌</button></span></li>`;
   ul.insertAdjacentHTML("beforeend", li);
@@ -27,10 +29,24 @@ get("#addTaskBtn").addEventListener("click", () => {
     tasks.splice(index, 1);
   });
   li = get(`#li_${tasks.length - 1}_done`);
-  li.addEventListener("click", () => {
-    let index = li.id.split("_")[1];
-    li = get(`#sp_${index}`);
-    li.classList.toggle("strike");
+  li.addEventListener("click", (event) => {
+    let div =
+      event.target.parentElement.parentElement.getElementsByTagName("SPAN")[0];
+    div.classList.toggle("strike");
+    event.target.classList.toggle("d-none");
+    event.target.parentElement
+      .getElementsByTagName("BUTTON")[1]
+      .classList.toggle("d-none");
+  });
+  li = get(`#li_${tasks.length - 1}_undone`);
+  li.addEventListener("click", (event) => {
+    let div =
+      event.target.parentElement.parentElement.getElementsByTagName("SPAN")[0];
+    div.classList.toggle("strike");
+    event.target.classList.toggle("d-none");
+    event.target.parentElement
+      .getElementsByTagName("BUTTON")[0]
+      .classList.toggle("d-none");
   });
 });
 get("#clearBtn").addEventListener("click", () => {
