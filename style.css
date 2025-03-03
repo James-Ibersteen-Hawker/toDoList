@@ -45,3 +45,7 @@ hr {
   margin-left: auto;
   margin-right: auto;
 }
+.h1 {
+  font-family: "Grape Nuts", serif;
+  font-size: 40px;
+}
