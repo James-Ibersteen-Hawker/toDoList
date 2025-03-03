@@ -1,6 +1,7 @@
 "use strict";
 let tasks = [];
-get("#addTaskBtn").addEventListener("click", () => {
+get("#addTaskBtn").addEventListener("click", task);
+function task() {
   let inp = get("#taskInput");
   let value = inp.value;
   inp.value = "";
@@ -48,7 +49,7 @@ get("#addTaskBtn").addEventListener("click", () => {
       .getElementsByTagName("BUTTON")[0]
       .classList.toggle("d-none");
   });
-});
+}
 get("#clearBtn").addEventListener("click", () => {
   let ul = get("#taskList");
   ul.innerHTML = "";
@@ -57,3 +58,6 @@ get("#clearBtn").addEventListener("click", () => {
 function get(param) {
   return document.querySelector(param);
 }
+window.addEventListener("keydown", function (event) {
+  if (event.key == "Enter") task();
+});
