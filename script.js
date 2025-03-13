@@ -1,5 +1,4 @@
 "use strict";
-import { bezier } from "./beziers.js";
 let tasks = [];
 let counter = 0;
 get("#addTaskBtn").addEventListener("click", task);
